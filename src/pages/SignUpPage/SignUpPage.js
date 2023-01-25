@@ -5,21 +5,31 @@ import { StyledInput } from "../../components/StyledInput";
 import { StyledButton } from "../../components/StyledButton";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import axios from 'axios';
+import { ErrorParagraph } from "./styled";
 
 export default function SignUpPage(){
 
     const [form, setForm] = useState({ email: "", password: "", name: "", confirm_password: "" });
     const navigate = useNavigate();
+    const [errorMessage, setErrorMessage] = useState("");
 
     function handleForm(e) {
         setForm({ ...form, [e.target.name]: e.target.value });
     }
 
 
-    function handleSignUp(e) {
+    async function handleSignUp(e) {
         e.preventDefault();
+        const body = {...form};
+        try {
+            const promise = await axios.post(`${process.env.REACT_APP_API_URL}/signUp`, body);
+            alert(promise.data);
+            navigate("/signIn");
+        } catch (error) {
+            setErrorMessage(error.response.data);
+        }
         
-        navigate("/signIn");
     }
 
     return (
@@ -67,6 +77,7 @@ export default function SignUpPage(){
                         onChange={handleForm}
                         placeholder="Confirme a senha" />
                     </div>
+                    {errorMessage && <ErrorParagraph>{errorMessage}</ErrorParagraph>}
                     <StyledButton hover={"#db7c4e"} background={"#d76b38"} type="submit">Fazer Cadastro</StyledButton>
                 </form>
                 <Link to="/signin">

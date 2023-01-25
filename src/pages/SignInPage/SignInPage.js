@@ -5,21 +5,35 @@ import { StyledInput } from "../../components/StyledInput";
 import { StyledButton } from "../../components/StyledButton";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { UserContext } from "../../context/UserContext";
+import { useContext } from "react";
+import axios from "axios";
+import { ErrorParagraph } from "./styled";
+
 
 export default function SignInPage(){
 
     const [form, setForm] = useState({ email: "", password: ""});
     const navigate = useNavigate();
+    const { setUser } = useContext(UserContext);
+    const [errorMessage, setErrorMessage] = useState("");
 
     function handleForm(e) {
         setForm({ ...form, [e.target.name]: e.target.value });
     }
 
 
-    function handleSignIn(e) {
+    async function handleSignIn(e) {
         e.preventDefault();
-        
-        navigate("/");
+        const body = {...form};
+        try {
+            const userData = await axios.post(`${process.env.REACT_APP_API_URL}/signIn`, body);
+            localStorage.setItem("user", JSON.stringify(userData.data))
+            setUser(userData.data)
+            navigate("/")
+        } catch (error) {
+            setErrorMessage(error.response.data);
+        }
     }
 
     return (
@@ -47,7 +61,7 @@ export default function SignInPage(){
                         onChange={handleForm}
                         placeholder="Digite sua senha" />
                     </div>
-
+                    {errorMessage && <ErrorParagraph>{errorMessage}</ErrorParagraph>}
                     <StyledButton hover={"#c34167"} background={"#a2103b"} type="submit">Fazer Login</StyledButton>
                 </form>
                 <Link to="/signup">
