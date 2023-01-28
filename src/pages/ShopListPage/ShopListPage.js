@@ -2,8 +2,7 @@ import React from "react";
 import { ScreenContainer } from "../../components/ScreenContainer";
 import styled from "styled-components";
 import nodelogo from "../../assets/logo-nodejs.svg";
-import { IonIcon } from "@ionic/react";
-import { bowlingBallOutline } from "ionicons";
+
 
 export default function ShopListPage() {
   return (

@@ -1,21 +1,20 @@
 import styled from "styled-components";
+import { headerColor, ionIconHeaderColor } from "../../constants/colors";
 
 export const HeaderStyle = styled.div`
   width: 100%;
   height: 100px;
-  background-color: ${"#b22222"};
+  background-color: ${headerColor};
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: fixed;
   top: 0;
   left: 0;
-  h1 {
-    font-family: "Permanent Marker", cursive;
-    font-size: 35px;
-    font-style: normal;
-    margin-left: 100px;
-    color: white;
+  img {
+    width: 200px;
+    height: 200px;
+    margin-left: 150px;
   }
 `;
 
@@ -24,8 +23,15 @@ export const LogoDivStyle = styled.div`
   width: 150px;
   justify-content: space-evenly;
   margin-right: 100px;
+  h1 {
+    font-family: "Poppins", sans-serif;
+    color: ${ionIconHeaderColor};
+    font-size: 20px;
+    margin-top: 8px;
+    margin-right: -15px;
+  }
   ion-icon {
-    color: white;
+    color: ${ionIconHeaderColor};
     font-size: 35px;
   }
 `;
