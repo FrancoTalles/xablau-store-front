@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import { HeaderStyle, LogoDivStyle } from "./styled";
-
+import logo from "../../assets/logo_xablau.png"
 export default function Header() {
   return (
     <HeaderStyle>
-      <h1>Xablau Store</h1>
+      <img src={logo} alt="Xablau Store"/>
       <LogoDivStyle>
-        <Link>
+        <Link to="/carrinho">
           <ion-icon name="cart"></ion-icon>
         </Link>
         <Link to="/signin">

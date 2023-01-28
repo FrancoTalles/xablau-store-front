@@ -11,7 +11,7 @@ export default function App() {
       <UserProvider>
         <Routes>
           <Route path="/" element={<HomePage />} />
-
+          <Route path="/carrinho" element={<ShopListPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/signin" element={<SignInPage />} />
         </Routes>

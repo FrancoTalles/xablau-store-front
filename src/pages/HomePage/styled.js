@@ -1,22 +1,126 @@
 import styled from "styled-components";
+import { StyledButton } from "../../components/StyledButton";
 
 export const HomeStyle = styled.div`
   width: 100%;
   height: 100vh;
-  background: url(${props => props.background}) no-repeat center center fixed; 
+  background: url(${(props) => props.background}) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   padding-top: 100px;
-`
+  display: flex;
+`;
 
 export const AdDiv = styled.div`
-    background-color: white;
-    width: 20vw;
+  background-color: white;
+  width: 15vw;
+  height: 80vh;
+  margin-top: 3vh;
+  margin-left: 1vw;
+  border: 1px solid black;
+  border-radius: 5px;
+  img{
+    width: 15vw;
     height: 80vh;
-`
+    object-fit: cover;
+  }
+`;
 
-export const mainDiv = styled.div`
-`
-  
+export const MainDiv = styled.div`
+  width: 81vw;
+  height: 80vh;
+  background-color: rgba(250, 250, 251, 0.9);
+  margin-top: 3vh;
+  margin-left: 2vw;
+  border: 1px solid black;
+  border-radius: 5px;
+  display: flex;
+  padding-left: 1.46vw;
+  padding-bottom: 2.87vh;
+  flex-wrap: wrap;
+  overflow-y: auto;
+  box-sizing: border-box;
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+`;
+
+export const Produto = styled.div`
+  width: 18.3vw;
+  height: 43.16vh;
+  background-color: rgb(255, 255, 255);
+  margin-top: 2.5vh;
+  margin-right: 1.09vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  border-radius: 5px;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 7px 1px grey;
+  &:hover {
+    box-shadow: 2px 2px 7px 1px grey;
+    cursor: pointer;
+  }
+`;
+
+export const Imagem = styled.img`
+  width: 84%;
+  margin-top: 1.72vh;
+  margin-bottom: 1.43vh;
+  border-radius: 5px;
+`;
+
+export const DivDetails = styled.div`
+  width: 84%;
+  height: 10.93vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: yellow;
+  h1 {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.17vw;
+    word-break: break-all;
+    margin-top: 0.71vh;
+    text-align: center;
+    font-weight: 700;
+  }
+  h2 {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.46vw;
+    margin-top: 1.43vh;
+    font-weight: 700;
+    color: ${"#d76b38"};
+  }
+  p {
+    font-family: "Poppins", sans-serif;
+    font-size: 0.73vw;
+    margin-top: 1.43vh;
+    padding-bottom: 0.71vh;
+    word-break: break-all;
+    font-weight: 700;
+    color: green;
+  }
+`;
+
+export const DivButtons = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  position: absolute;
+  bottom: 1.43vh;
+`;
+
+export const StyledButtonHome = styled(StyledButton)`
+  height: 4.31vh;
+  width: 7.32vw;
+  :first-child {
+    margin-right: 0.36vw;
+  }
+  :nth-child(2) {
+    margin-left: 0.43vw;
+  }
+`;
