@@ -1,5 +1,11 @@
 import styled from "styled-components";
 import { StyledButton } from "../../components/StyledButton";
+import {
+  mainDivColor,
+  preçoCor,
+  preçoEstoque,
+  produtoColor,
+} from "../../constants/colors";
 
 export const HomeStyle = styled.div`
   width: 100%;
@@ -11,6 +17,7 @@ export const HomeStyle = styled.div`
   background-size: cover;
   padding-top: 100px;
   display: flex;
+  box-sizing: border-box;
 `;
 
 export const AdDiv = styled.div`
@@ -19,9 +26,9 @@ export const AdDiv = styled.div`
   height: 80vh;
   margin-top: 3vh;
   margin-left: 1vw;
-  border: 1px solid black;
   border-radius: 5px;
-  img{
+  box-sizing: border-box;
+  img {
     width: 15vw;
     height: 80vh;
     object-fit: cover;
@@ -31,10 +38,9 @@ export const AdDiv = styled.div`
 export const MainDiv = styled.div`
   width: 81vw;
   height: 80vh;
-  background-color: rgba(250, 250, 251, 0.9);
+  background-color: ${mainDivColor};
   margin-top: 3vh;
   margin-left: 2vw;
-  border: 1px solid black;
   border-radius: 5px;
   display: flex;
   padding-left: 1.46vw;
@@ -50,7 +56,7 @@ export const MainDiv = styled.div`
 export const Produto = styled.div`
   width: 18.3vw;
   height: 43.16vh;
-  background-color: rgb(255, 255, 255);
+  background-color: ${produtoColor};
   margin-top: 2.5vh;
   margin-right: 1.09vw;
   display: flex;
@@ -68,9 +74,11 @@ export const Produto = styled.div`
 
 export const Imagem = styled.img`
   width: 84%;
+  height: 21.15vh;
   margin-top: 1.72vh;
   margin-bottom: 1.43vh;
   border-radius: 5px;
+  border: 1px solid ${"#d3d3d3"};
 `;
 
 export const DivDetails = styled.div`
@@ -79,7 +87,6 @@ export const DivDetails = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: yellow;
   h1 {
     font-family: "Poppins", sans-serif;
     font-size: 1.17vw;
@@ -93,7 +100,7 @@ export const DivDetails = styled.div`
     font-size: 1.46vw;
     margin-top: 1.43vh;
     font-weight: 700;
-    color: ${"#d76b38"};
+    color: ${preçoCor};
   }
   p {
     font-family: "Poppins", sans-serif;
@@ -102,7 +109,7 @@ export const DivDetails = styled.div`
     padding-bottom: 0.71vh;
     word-break: break-all;
     font-weight: 700;
-    color: green;
+    color: ${preçoEstoque};
   }
 `;
 

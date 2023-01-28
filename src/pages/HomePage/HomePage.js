@@ -12,105 +12,71 @@ import {
 // import PcGamer from "../../assets/PcGamer.jpg"
 import PcGamer from "../../assets/PcGamer.jpg";
 import Gamer from "../../assets/Gamer.jpg";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
+import { CarrinhoContext } from "../../context/CarrinhoContext";
 
 export default function HomePage() {
-  const teste = [
-    {
-      name: "MP3 PLAYER",
-      price: 150.55,
-      image:
-        "https://img.freepik.com/premium-psd/rose-gold-3d-media-player-mockup_106244-1749.jpg?w=740",
-      description: "Mp3 player Muito Bom",
-      category: "Eletronic Device",
-    },
-    {
-      name: "Mp3 Player Com Fone",
-      price: 150.55,
-      image:
-        "https://img.freepik.com/premium-psd/rose-gold-3d-media-player-mockup_106244-1749.jpg?w=740",
-      description: "Mp3 player Muito Bom",
-      category: "Eletronic Device",
-    },
-    {
-      name: "Mp3 Player Com Fone",
-      price: 150.55,
-      image:
-        "https://img.freepik.com/premium-psd/rose-gold-3d-media-player-mockup_106244-1749.jpg?w=740",
-      description: "Mp3 player Muito Bom",
-      category: "Eletronic Device",
-    },
-    {
-      name: "Mp3 Player Com Fone",
-      price: 150.55,
-      image:
-        "https://img.freepik.com/premium-psd/rose-gold-3d-media-player-mockup_106244-1749.jpg?w=740",
-      description: "Mp3 player Muito Bom",
-      category: "Eletronic Device",
-    },
-    {
-      name: "Mp3 Player Com Fone",
-      price: 150.55,
-      image:
-        "https://img.freepik.com/premium-psd/rose-gold-3d-media-player-mockup_106244-1749.jpg?w=740",
-      description: "Mp3 player Muito Bom",
-      category: "Eletronic Device",
-    },
-    {
-      name: "Mp3 Player Com Fone",
-      price: 150.55,
-      image:
-        "https://img.freepik.com/premium-psd/rose-gold-3d-media-player-mockup_106244-1749.jpg?w=740",
-      description: "Mp3 player Muito Bom",
-      category: "Eletronic Device",
-    },
-    {
-      name: "Mp3 Player Com Fone",
-      price: 150.55,
-      image:
-        "https://img.freepik.com/premium-psd/rose-gold-3d-media-player-mockup_106244-1749.jpg?w=740",
-      description: "Mp3 player Muito Bom",
-      category: "Eletronic Device",
-    },
-  ];
+  const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
+  const { carrinho, setCarrinho } = useContext(CarrinhoContext);
 
-  const [products, setProducts] = useState([])
+  function insereCarrinho(item) {
+    const auxiliarCarrinho = [...carrinho, item];
+    console.log(auxiliarCarrinho);
+    setCarrinho(auxiliarCarrinho);
+    localStorage.setItem("carrinho", JSON.stringify(auxiliarCarrinho));
+  }
+
+  function compraDireta(item) {
+    const auxiliarCarrinho = [...carrinho, item];
+    setCarrinho(auxiliarCarrinho);
+    localStorage.setItem("carrinho", JSON.stringify(auxiliarCarrinho));
+    // navigate("/checkout");
+    // Comentei o navigate para quando tu fizer a tela de checkout Daniel
+  }
 
   useEffect(() => {
-      const promise = axios.get(`https://xablaustore-api.onrender.com/home`);
-      promise.then((res) => {
-        console.log(res.data);
-        setProducts(res.data)
-      })
+    const promise = axios.get(`https://xablaustore-api.onrender.com/home`);
+    promise.then((res) => {
+      setProducts(res.data);
+    });
 
-      promise.catch((error) => {
-        console.log(error);
-        alert("Não foi possível acessar o servidor, tente novamente mais tarde")
-      })
-  }, [])
+    promise.catch((error) => {
+      console.log(error);
+      alert("Não foi possível acessar o servidor, tente novamente mais tarde");
+    });
+  }, []);
   return (
     <>
-      <Header></Header>
+      <Header carrinho={carrinho}></Header>
       <HomeStyle background={PcGamer}>
         <AdDiv>
-          <img src={Gamer}/>
+          <img src={Gamer} alt="Imagem" />
         </AdDiv>
         <MainDiv>
-          {teste?.map((item, index) => (
+          {products?.map((item, index) => (
             <Produto key={index}>
               <Imagem src={item.image} alt="Imagem" />
               <DivDetails>
-                <h1>{item.name.slice(0, 17)}</h1>
+                <h1>{item.name.slice(0, 18) + "..."}</h1>
                 <h2>R$ {item.price.toFixed(2).replace(".", ",")}</h2>
                 <p>Em Estoque</p>
               </DivDetails>
               <DivButtons>
-                <StyledButtonHome hover={"#db7c4e"} background={"#d76b38"}>
+                <StyledButtonHome
+                  hover={"#db7c4e"}
+                  background={"#d76b38"}
+                  onClick={() => insereCarrinho(item)}
+                >
                   Carrinho
                 </StyledButtonHome>
-                <StyledButtonHome hover={"#c34167"} background={"#a2103b"}>
+                <StyledButtonHome
+                  hover={"#c34167"}
+                  background={"#a2103b"}
+                  onClick={() => compraDireta(item)}
+                >
                   Comprar
                 </StyledButtonHome>
               </DivButtons>
