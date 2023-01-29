@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function ProductBox(carrinho) {
+export default function ProductBox({ image, name, price, id, removeProduct }) {
   return (
     <>
       <ProductContainer>
         <ProdTitle>
-          <img src={carrinho.image} alt="exp" />
-          <p>{carrinho.name}</p>
+          <img src={image} alt={name} />
+          <p>{name}</p>
         </ProdTitle>
-        <h2>{carrinho.price}</h2>
+        <h2>{price}</h2>
         <div>
           <Quant>Quant.</Quant>
           <AddProduct>
@@ -19,7 +19,10 @@ export default function ProductBox(carrinho) {
           </AddProduct>
         </div>
         <TrashIcon>
-          <ion-icon name="trash-outline"></ion-icon>
+          <ion-icon
+            onClick={() => removeProduct(id)}
+            name="trash-outline"
+          ></ion-icon>
         </TrashIcon>
       </ProductContainer>
     </>
@@ -55,6 +58,9 @@ const ProdTitle = styled.div`
   align-items: center;
   img {
     margin: 0 15px;
+  }
+  p {
+    max-width: 500px;
   }
 `;
 const AddProduct = styled.div`

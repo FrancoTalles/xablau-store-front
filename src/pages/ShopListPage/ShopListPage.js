@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { CarrinhoContext } from "../../context/CarrinhoContext";
 import Header from "../../components/Header/Header";
@@ -12,8 +12,23 @@ import {
 } from "./styled";
 
 export default function ShopListPage() {
+  const [refresh, setRefresh] = useState(false);
   const { carrinho, setCarrinho } = useContext(CarrinhoContext);
+  const [totalValue, setTotalValue] = useState(0);
 
+  function removeProduct(id) {
+    const newCarrinho = carrinho.filter((p) => p._id !== id);
+    localStorage.setItem("carrinho", JSON.stringify(newCarrinho));
+    setCarrinho([newCarrinho]);
+    setRefresh(!refresh);
+  }
+
+  useEffect(() => {
+    const localCarrinho = JSON.parse(localStorage.getItem("carrinho"));
+    setCarrinho(localCarrinho);
+  }, [refresh]);
+
+  console.log("carrinho: ", carrinho);
   return (
     <>
       <Container>
@@ -23,9 +38,16 @@ export default function ShopListPage() {
           <ShopTitle>
             <h2>Carrinho de Compras</h2>
           </ShopTitle>
-          {carrinho?.map((item, index) => {
-            <ProductBox carrinho={item} />;
-          })}
+          {carrinho?.map((item, idx) => (
+            <ProductBox
+              key={idx}
+              image={item.image}
+              name={item.name}
+              price={item.price}
+              id={item._id}
+              removeProduct={removeProduct}
+            />
+          ))}
         </ShopContainer>
         <FinishBuy>
           <div>
