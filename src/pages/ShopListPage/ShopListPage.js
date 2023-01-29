@@ -1,69 +1,47 @@
 import React from "react";
-import { ScreenContainer } from "../../components/ScreenContainer";
-import styled from "styled-components";
-import nodelogo from "../../assets/logo-nodejs.svg";
-
+import { useContext } from "react";
+import { CarrinhoContext } from "../../context/CarrinhoContext";
+import Header from "../../components/Header/Header";
+import ProductBox from "./ProductBox.js";
+import {
+  ShopContainer,
+  ShopTitle,
+  FinishBuy,
+  ShopButton,
+  Container,
+} from "./styled";
 
 export default function ShopListPage() {
+  const { carrinho, setCarrinho } = useContext(CarrinhoContext);
+
   return (
     <>
       <Container>
+        <Header></Header>
+
         <ShopContainer>
           <ShopTitle>
             <h2>Carrinho de Compras</h2>
           </ShopTitle>
-          <ProductBox>
-            <img src={nodelogo} alt="exp" />
-            <p>NODEJS BLABLA</p>
-            <h2>R$ 100</h2>
-            <ion-icon name="trash"></ion-icon>
-          </ProductBox>
+          {carrinho?.map((item, index) => {
+            <ProductBox carrinho={item} />;
+          })}
         </ShopContainer>
+        <FinishBuy>
+          <div>
+            <h1>Valor total: </h1>
+            <h1>R$ 1000</h1>
+          </div>
+          <div>
+            <ShopButton hover={"#db7c4e"} background={"#d76b38"}>
+              Finalizar Compra
+            </ShopButton>
+            <ShopButton hover={"#c34167"} background={"#a2103b"}>
+              Continuar Comprando
+            </ShopButton>
+          </div>
+        </FinishBuy>
       </Container>
     </>
   );
 }
-export const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;
-
-const ShopContainer = styled.div`
-  width: 900px;
-  min-height: 300px;
-  border-radius: 5px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-  background-color: grey;
-  box-shadow: 0 0 7px 1px grey;
-`;
-
-const ProductBox = styled.div`
-  height: auto;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: white;
-  img {
-    width: 50px;
-    height: 50px;
-  }
-  ion-icon {
-    color: red;
-  }
-`;
-const ShopTitle = styled.div`
-  width: 100%;
-  h2 {
-    font-size: 30px;
-    font-weight: 700;
-    color: white;
-  }
-`;
