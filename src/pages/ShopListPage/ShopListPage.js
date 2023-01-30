@@ -14,8 +14,8 @@ import {
 
 export default function ShopListPage() {
   const [refresh, setRefresh] = useState(false);
-  const { carrinho, setCarrinho, totalValue, setTotalValue } =
-    useContext(CarrinhoContext);
+  const { carrinho, setCarrinho, setTotalValue } = useContext(CarrinhoContext);
+
   function removeProduct(id) {
     const newCarrinho = carrinho.filter((p) => p._id !== id);
     localStorage.setItem("carrinho", JSON.stringify(newCarrinho));
@@ -25,8 +25,8 @@ export default function ShopListPage() {
 
   function addQuant(id) {
     const auxCarrinho = [...carrinho];
-    const increment = auxCarrinho.find((i) => i._id == id);
-    const index = auxCarrinho.findIndex((i) => i._id == id);
+    const increment = auxCarrinho.find((i) => i._id === id);
+    const index = auxCarrinho.findIndex((i) => i._id === id);
 
     increment.quant++;
     auxCarrinho.splice(index, 1, increment);
@@ -37,14 +37,22 @@ export default function ShopListPage() {
 
   function minusQuant(id) {
     const auxCarrinho = [...carrinho];
-    const increment = auxCarrinho.find((i) => i._id == id);
-    const index = auxCarrinho.findIndex((i) => i._id == id);
+    const increment = auxCarrinho.find((i) => i._id === id);
+    const index = auxCarrinho.findIndex((i) => i._id === id);
+    const identificador = id;
+    console.log(identificador)
 
     increment.quant--;
+
     auxCarrinho.splice(index, 1, increment);
     localStorage.setItem("carrinho", JSON.stringify(auxCarrinho));
     setCarrinho(auxCarrinho);
     setRefresh(!refresh);
+
+    if (increment.quant <= 0){
+      console.log("Entrou aqui")
+      removeProduct(identificador);
+    }
   }
 
   const total = carrinho?.reduce((acc, item) => {
@@ -84,7 +92,7 @@ export default function ShopListPage() {
         <FinishBuy>
           <div>
             <h1>Valor total: </h1>
-            <h1>R$ {total.toFixed(2)}</h1>
+            <h1>R$ {total.toLocaleString("pt-br", {minimumFractionDigits: 2})}</h1>
           </div>
           <div>
             <ShopButton
@@ -92,8 +100,8 @@ export default function ShopListPage() {
                 setTotalValue(total);
                 console.log("coleeee");
               }}
-              hover={"#db7c4e"}
-              background={"#d76b38"}
+              hover={total > 0 ? "#d76b38" : "#808080"}
+              background={total > 0 ? "#d76b38" : "#808080"}
               disabled={total > 0 ? false : true}
             >
               Finalizar Compra
