@@ -16,7 +16,8 @@ export default function PurchaseButton(props) {
       return;
     }
 
-    const auxiliarCarrinho = [...carrinho, item];
+    const newItem = {...item, quant: 1};
+    const auxiliarCarrinho = [...carrinho, newItem];
     setCarrinho(auxiliarCarrinho);
     localStorage.setItem("carrinho", JSON.stringify(auxiliarCarrinho));
     navigate("/checkout");
