@@ -7,35 +7,19 @@ import {
   Imagem,
   MainDiv,
   Produto,
-  StyledButtonHome,
 } from "./styled";
 // import PcGamer from "../../assets/PcGamer.jpg"
 import PcGamer from "../../assets/PcGamer.jpg";
 import Gamer from "../../assets/Gamer.jpg";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { CarrinhoContext } from "../../context/CarrinhoContext";
+import CarButton from "../../components/CarButton";
+import PurchaseButton from "../../components/PurchaseButton";
 
 export default function HomePage() {
   const [products, setProducts] = useState([]);
-  const navigate = useNavigate();
-  const { carrinho, setCarrinho } = useContext(CarrinhoContext);
-
-  function insereCarrinho(item) {
-    const auxiliarCarrinho = [...carrinho, item];
-    console.log(auxiliarCarrinho);
-    setCarrinho(auxiliarCarrinho);
-    localStorage.setItem("carrinho", JSON.stringify(auxiliarCarrinho));
-  }
-
-  function compraDireta(item) {
-    const auxiliarCarrinho = [...carrinho, item];
-    setCarrinho(auxiliarCarrinho);
-    localStorage.setItem("carrinho", JSON.stringify(auxiliarCarrinho));
-    // navigate("/checkout");
-    // Comentei o navigate para quando tu fizer a tela de checkout Daniel
-  }
+  const { carrinho } = useContext(CarrinhoContext);
 
   useEffect(() => {
     const promise = axios.get(`https://xablaustore-api.onrender.com/home`);
@@ -65,20 +49,8 @@ export default function HomePage() {
                 <p>Em Estoque</p>
               </DivDetails>
               <DivButtons>
-                <StyledButtonHome
-                  hover={"#db7c4e"}
-                  background={"#d76b38"}
-                  onClick={() => insereCarrinho(item)}
-                >
-                  Carrinho
-                </StyledButtonHome>
-                <StyledButtonHome
-                  hover={"#c34167"}
-                  background={"#a2103b"}
-                  onClick={() => compraDireta(item)}
-                >
-                  Comprar
-                </StyledButtonHome>
+                <CarButton item={item} />
+                <PurchaseButton item={item} />
               </DivButtons>
             </Produto>
           ))}
