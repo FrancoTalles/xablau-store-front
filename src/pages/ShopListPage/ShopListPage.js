@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { CarrinhoContext } from "../../context/CarrinhoContext";
 import Header from "../../components/Header/Header";
+import { Link } from "react-router-dom";
 import ProductBox from "./ProductBox.js";
 import {
   ShopContainer,
@@ -13,9 +14,8 @@ import {
 
 export default function ShopListPage() {
   const [refresh, setRefresh] = useState(false);
-  const { carrinho, setCarrinho } = useContext(CarrinhoContext);
-  const [totalValue, setTotalValue] = useState(0);
-
+  const { carrinho, setCarrinho, totalValue, setTotalValue } =
+    useContext(CarrinhoContext);
   function removeProduct(id) {
     const newCarrinho = carrinho.filter((p) => p._id !== id);
     localStorage.setItem("carrinho", JSON.stringify(newCarrinho));
@@ -23,8 +23,37 @@ export default function ShopListPage() {
     setRefresh(!refresh);
   }
 
+  function addQuant(id) {
+    const auxCarrinho = [...carrinho];
+    const increment = auxCarrinho.find((i) => i._id == id);
+    const index = auxCarrinho.findIndex((i) => i._id == id);
+
+    increment.quant++;
+    auxCarrinho.splice(index, 1, increment);
+    localStorage.setItem("carrinho", JSON.stringify(auxCarrinho));
+    setCarrinho(auxCarrinho);
+    setRefresh(!refresh);
+  }
+
+  function minusQuant(id) {
+    const auxCarrinho = [...carrinho];
+    const increment = auxCarrinho.find((i) => i._id == id);
+    const index = auxCarrinho.findIndex((i) => i._id == id);
+
+    increment.quant--;
+    auxCarrinho.splice(index, 1, increment);
+    localStorage.setItem("carrinho", JSON.stringify(auxCarrinho));
+    setCarrinho(auxCarrinho);
+    setRefresh(!refresh);
+  }
+
+  const total = carrinho?.reduce((acc, item) => {
+    return item.price > 0 ? acc + item.price * item.quant : acc + 0;
+  }, 0);
+
   useEffect(() => {
     const localCarrinho = JSON.parse(localStorage.getItem("carrinho"));
+
     setCarrinho(localCarrinho);
   }, [refresh]);
 
@@ -32,7 +61,7 @@ export default function ShopListPage() {
   return (
     <>
       <Container>
-        <Header></Header>
+        <Header carrinho={carrinho}></Header>
 
         <ShopContainer>
           <ShopTitle>
@@ -45,22 +74,35 @@ export default function ShopListPage() {
               name={item.name}
               price={item.price}
               id={item._id}
+              quant={item.quant}
               removeProduct={removeProduct}
+              addQuant={addQuant}
+              minusQuant={minusQuant}
             />
           ))}
         </ShopContainer>
         <FinishBuy>
           <div>
             <h1>Valor total: </h1>
-            <h1>R$ 1000</h1>
+            <h1>R$ {total.toFixed(2)}</h1>
           </div>
           <div>
-            <ShopButton hover={"#db7c4e"} background={"#d76b38"}>
+            <ShopButton
+              onClick={() => {
+                setTotalValue(total);
+                console.log("coleeee");
+              }}
+              hover={"#db7c4e"}
+              background={"#d76b38"}
+              disabled={total > 0 ? false : true}
+            >
               Finalizar Compra
             </ShopButton>
-            <ShopButton hover={"#c34167"} background={"#a2103b"}>
-              Continuar Comprando
-            </ShopButton>
+            <Link to="/">
+              <ShopButton hover={"#c34167"} background={"#a2103b"}>
+                Continuar Comprando
+              </ShopButton>
+            </Link>
           </div>
         </FinishBuy>
       </Container>

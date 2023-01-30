@@ -1,7 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function ProductBox({ image, name, price, id, removeProduct }) {
+export default function ProductBox({
+  image,
+  name,
+  price,
+  id,
+  quant,
+  removeProduct,
+  addQuant,
+  minusQuant,
+}) {
   return (
     <>
       <ProductContainer>
@@ -13,9 +22,15 @@ export default function ProductBox({ image, name, price, id, removeProduct }) {
         <div>
           <Quant>Quant.</Quant>
           <AddProduct>
-            <ion-icon name="chevron-back"></ion-icon>
-            <h1>1</h1>
-            <ion-icon name="chevron-forward"></ion-icon>
+            <ion-icon
+              onClick={() => minusQuant(id)}
+              name="chevron-back"
+            ></ion-icon>
+            <h1>{quant}</h1>
+            <ion-icon
+              onClick={() => addQuant(id)}
+              name="chevron-forward"
+            ></ion-icon>
           </AddProduct>
         </div>
         <TrashIcon>

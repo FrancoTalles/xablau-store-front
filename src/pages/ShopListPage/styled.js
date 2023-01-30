@@ -8,11 +8,16 @@ export const Container = styled.div`
   align-items: center;
   flex-direction: column;
   background: #ccc;
+  a {
+    text-decoration: none;
+  }
 `;
 
 export const ShopContainer = styled.div`
   width: 900px;
-  min-height: 300px;
+  height: 600px;
+  overflow-y: scroll;
+  margin-top: 150px;
   border-radius: 5px;
   display: flex;
   justify-content: flex-start;
