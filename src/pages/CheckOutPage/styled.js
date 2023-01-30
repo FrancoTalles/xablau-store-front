@@ -84,7 +84,6 @@ export const StyledInput = styled.input`
     }
 `
 
-
 export const Item = styled.div`
 display: flex;
     align-items: center;
@@ -96,5 +95,15 @@ display: flex;
     color: #a2103b;
     border-radius: 4.5px;
     margin-bottom: 10px;
-
 `;
+
+export const Title = styled.h1`
+    margin-top: 40px;
+    font-size: 40px;
+    font-weight: 700;
+`
+
+export const Subtitle = styled.p`
+    margin-top: 25px;
+    font-size: 25px;
+`

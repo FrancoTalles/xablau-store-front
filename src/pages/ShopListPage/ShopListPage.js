@@ -25,8 +25,8 @@ export default function ShopListPage() {
 
   function addQuant(id) {
     const auxCarrinho = [...carrinho];
-    const increment = auxCarrinho.find((i) => i._id == id);
-    const index = auxCarrinho.findIndex((i) => i._id == id);
+    const increment = auxCarrinho.find((i) => i._id === id);
+    const index = auxCarrinho.findIndex((i) => i._id === id);
 
     increment.quant++;
     auxCarrinho.splice(index, 1, increment);
@@ -37,8 +37,8 @@ export default function ShopListPage() {
 
   function minusQuant(id) {
     const auxCarrinho = [...carrinho];
-    const increment = auxCarrinho.find((i) => i._id == id);
-    const index = auxCarrinho.findIndex((i) => i._id == id);
+    const increment = auxCarrinho.find((i) => i._id === id);
+    const index = auxCarrinho.findIndex((i) => i._id === id);
 
     increment.quant--;
     auxCarrinho.splice(index, 1, increment);
