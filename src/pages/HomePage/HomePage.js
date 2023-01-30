@@ -21,7 +21,7 @@ export default function HomePage() {
   const { carrinho } = useContext(CarrinhoContext);
 
   useEffect(() => {
-    const promise = axios.get(`https://xablaustore-api.onrender.com/home`);
+    const promise = axios.get(`${process.env.REACT_APP_API_URL}/home`);
     promise.then((res) => {
       setProducts(res.data);
     });
