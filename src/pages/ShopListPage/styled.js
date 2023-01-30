@@ -7,7 +7,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: #ccc;
+  background: #ffffff;
   a {
     text-decoration: none;
   }
@@ -24,7 +24,7 @@ export const ShopContainer = styled.div`
   align-items: center;
   flex-direction: column;
   background-color: white;
-  box-shadow: 0 0 7px 1px grey;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 `;
 
 export const ShopTitle = styled.div`
@@ -43,7 +43,7 @@ export const FinishBuy = styled.div`
   height: 100px;
   margin: 20px 0;
   background-color: white;
-  box-shadow: 0 0 7px 1px grey;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 5px;
   display: flex;
   justify-content: space-between;
