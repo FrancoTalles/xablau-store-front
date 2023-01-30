@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { StyledButton } from "../../components/StyledButton";
 import {
   mainDivColor,
   preçoCor,
@@ -119,15 +118,4 @@ export const DivButtons = styled.div`
   justify-content: center;
   position: absolute;
   bottom: 1.43vh;
-`;
-
-export const StyledButtonHome = styled(StyledButton)`
-  height: 4.31vh;
-  width: 7.32vw;
-  :first-child {
-    margin-right: 0.36vw;
-  }
-  :nth-child(2) {
-    margin-left: 0.43vw;
-  }
 `;
