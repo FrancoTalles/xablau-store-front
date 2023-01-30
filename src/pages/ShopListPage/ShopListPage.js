@@ -40,7 +40,6 @@ export default function ShopListPage() {
     const increment = auxCarrinho.find((i) => i._id === id);
     const index = auxCarrinho.findIndex((i) => i._id === id);
     const identificador = id;
-    console.log(identificador)
  
 
     increment.quant--;
@@ -66,7 +65,7 @@ export default function ShopListPage() {
     setCarrinho(localCarrinho);
   }, [refresh]);
 
-  console.log("carrinho: ", carrinho);
+  
   return (
     <>
       <Container>
@@ -93,20 +92,22 @@ export default function ShopListPage() {
         <FinishBuy>
           <div>
             <h1>Valor total: </h1>
-            <h1>R$ {total.toLocaleString("pt-br", {minimumFractionDigits: 2})}</h1>
+            <h1>R$ {total > 0 ? total.toLocaleString("pt-br", {minimumFractionDigits: 2}) : 0}</h1>
           </div>
           <div>
-            <ShopButton
-              onClick={() => {
-                setTotalValue(total);
-                console.log("coleeee");
-              }}
-              hover={total > 0 ? "#d76b38" : "#808080"}
-              background={total > 0 ? "#d76b38" : "#808080"}
-              disabled={total > 0 ? false : true}
-            >
-              Finalizar Compra
-            </ShopButton>
+            <Link to="/checkout">
+              <ShopButton
+                onClick={() => {
+                  setTotalValue(total);
+    
+                }}
+                hover={total > 0 ? "#d76b38" : "#808080"}
+                background={total > 0 ? "#d76b38" : "#808080"}
+                disabled={total > 0 ? false : true}
+              >
+                Finalizar Compra
+              </ShopButton>
+            </Link>
             <Link to="/">
               <ShopButton hover={"#c34167"} background={"#a2103b"}>
                 Continuar Comprando

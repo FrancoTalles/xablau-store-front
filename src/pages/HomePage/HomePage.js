@@ -9,8 +9,7 @@ import {
   Produto,
 } from "./styled";
 // import PcGamer from "../../assets/PcGamer.jpg"
-import PcGamer from "../../assets/PcGamer.jpg";
-import Gamer from "../../assets/Gamer.jpg";
+import ad from "../../assets/ad.jpg"
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { CarrinhoContext } from "../../context/CarrinhoContext";
@@ -35,9 +34,9 @@ export default function HomePage() {
   return (
     <>
       <Header carrinho={carrinho}></Header>
-      <HomeStyle background={PcGamer}>
+      <HomeStyle>
         <AdDiv>
-          <img src={Gamer} alt="Imagem" />
+          <img src={ad} alt="Imagem" />
         </AdDiv>
         <MainDiv>
           {products?.map((item, index) => (

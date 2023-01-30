@@ -9,11 +9,7 @@ import {
 export const HomeStyle = styled.div`
   width: 100%;
   height: 100vh;
-  background: url(${(props) => props.background}) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  background: #ffffff;
   padding-top: 100px;
   display: flex;
   box-sizing: border-box;
@@ -45,10 +41,10 @@ export const MainDiv = styled.div`
   padding-left: 1.46vw;
   padding-bottom: 2.87vh;
   flex-wrap: wrap;
-  overflow-y: auto;
+  overflow-y: scroll;
   box-sizing: border-box;
   ::-webkit-scrollbar {
-    width: 0px;
+    width: 5px;
   }
 `;
 
@@ -77,6 +73,7 @@ export const Imagem = styled.img`
   margin-top: 1.72vh;
   margin-bottom: 1.43vh;
   border-radius: 5px;
+  object-fit: contain;
   border: 1px solid ${"#d3d3d3"};
 `;
 

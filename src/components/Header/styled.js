@@ -8,13 +8,15 @@ export const HeaderStyle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
   position: fixed;
   top: 0;
   left: 0;
+  padding: 0px 100px;
   img {
     width: 200px;
     height: 200px;
-    margin-left: 150px;
+  
   }
 `;
 
@@ -22,7 +24,6 @@ export const LogoDivStyle = styled.div`
   display: flex;
   width: 150px;
   justify-content: space-evenly;
-  margin-right: 100px;
   h1 {
     font-family: "Poppins", sans-serif;
     color: ${ionIconHeaderColor};
