@@ -41,6 +41,7 @@ export default function ShopListPage() {
     const index = auxCarrinho.findIndex((i) => i._id === id);
     const identificador = id;
     console.log(identificador)
+ 
 
     increment.quant--;
 
