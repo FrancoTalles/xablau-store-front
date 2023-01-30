@@ -12,7 +12,7 @@ export default function PurchaseButton(props) {
   function compraDireta(item) {
     const existe = carrinho.filter((obj) => obj.name === item.name);
     if (existe.length !== 0) {
-      navigate("/checkout");
+      navigate("/carrinho");
       return;
     }
 
@@ -20,7 +20,7 @@ export default function PurchaseButton(props) {
     const auxiliarCarrinho = [...carrinho, newItem];
     setCarrinho(auxiliarCarrinho);
     localStorage.setItem("carrinho", JSON.stringify(auxiliarCarrinho));
-    navigate("/checkout");
+    navigate("/carrinho");
   }
   return (
     <StyledPurchaseButton onClick={() => compraDireta(item)}>
