@@ -23,14 +23,16 @@ export default function HomePage() {
   const { carrinho, setCarrinho } = useContext(CarrinhoContext);
 
   function insereCarrinho(item) {
-    const auxiliarCarrinho = [...carrinho, item];
+    const newItem = { ...item, quant: 1 };
+    const auxiliarCarrinho = [...carrinho, newItem];
     console.log(auxiliarCarrinho);
     setCarrinho(auxiliarCarrinho);
     localStorage.setItem("carrinho", JSON.stringify(auxiliarCarrinho));
   }
 
   function compraDireta(item) {
-    const auxiliarCarrinho = [...carrinho, item];
+    const newItem = { ...item, quant: 1 };
+    const auxiliarCarrinho = [...carrinho, newItem];
     setCarrinho(auxiliarCarrinho);
     localStorage.setItem("carrinho", JSON.stringify(auxiliarCarrinho));
     // navigate("/checkout");
